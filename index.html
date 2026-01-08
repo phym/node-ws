@@ -1,722 +1,645 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
-
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
-
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
-</body>
-
-</html>
+function getCookie(c_name) {
+  if (document.cookie.length > 0) {
+    let c_start = document.cookie.indexOf(c_name + "=");
+    if (c_start != -1) {
+      c_start = c_start + c_name.length + 1;
+      c_end = document.cookie.indexOf(";", c_start);
+      if (c_end == -1) c_end = document.cookie.length;
+      return unescape(document.cookie.substring(c_start, c_end));
+    }
+  }
+  return "";
+}
+
+function setCookie(name, value) {
+  const Days = 1;
+  const exp = new Date();
+  exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+  document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+}
+
+function getNextDate() {
+  const today = new Date(); // 获取当前日期对象
+  const year = today.getFullYear();  // 获取当前年份
+  const month = today.getMonth() + 1;  // 获取当前月份 (0-11, 所以需要加 1)
+  const day = today.getDate();  // 获取当前日期（1-31）
+  // 格式化成 "年-月-日" 格式，月份和日期如果小于10补零
+  const formattedDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+  return formattedDate;
+}
+
+function getQueryParam(url, param) {
+  const regex = new RegExp("[?&]" + param + "=([^&#]*)", "i");
+  const match = url.match(regex);
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
+function calculateLoan(loanAmount, months, method) {
+  const monthlyRate = 10.5 / 12 / 100;  // 月利率
+  const dailyRate = 10.5 / 365 / 100;   // 日利率
+  let totalRepayment = 0;  // 总还款
+  let totalInterest = 0;   // 总利息
+  const repayments = [];   // 每期还款信息
+  const start = new Date(getNextDate());  // 转换开始日期为 Date 对象
+  function formatDate(date) {
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  }
+  if (method === "等额本息") {
+    // 等额本息的月还款金额计算公式
+    const monthlyRepayment = loanAmount * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1);
+    for (let i = 1; i <= months; i++) {
+      const interestForMonth = loanAmount * monthlyRate;  // 每期利息
+      const principalForMonth = monthlyRepayment - interestForMonth;  // 每期本金
+      loanAmount -= principalForMonth;  // 减少剩余本金
+      totalRepayment += monthlyRepayment;  // 累加总还款
+      totalInterest += interestForMonth;   // 累加总利息
+      const repaymentDate = new Date(start);  // 复制开始日期
+      repaymentDate.setMonth(start.getMonth() + i);  // 设置还款月份
+      repayments.push({
+        date: formatDate(repaymentDate),
+        repayment: monthlyRepayment.toFixed(2),
+        principal: principalForMonth.toFixed(2),
+        interest: interestForMonth.toFixed(2),
+        remainingPrincipal: loanAmount.toFixed(2)
+      });
+    }
+  } else if (method === "等额本金") {
+    // 等额本金，每期偿还相同本金
+    const principalPerMonth = loanAmount / months;
+    for (let i = 1; i <= months; i++) {
+      const interestForMonth = loanAmount * monthlyRate;  // 每期利息
+      const repaymentForMonth = principalPerMonth + interestForMonth;  // 每期还款
+      loanAmount -= principalPerMonth;  // 减少剩余本金
+      totalRepayment += repaymentForMonth;  // 累加总还款
+      totalInterest += interestForMonth;   // 累加总利息
+      const repaymentDate = new Date(start);  // 复制开始日期
+      repaymentDate.setMonth(start.getMonth() + i);  // 设置还款月份
+      repayments.push({
+        date: formatDate(repaymentDate),
+        repayment: repaymentForMonth.toFixed(2),
+        principal: principalPerMonth.toFixed(2),
+        interest: interestForMonth.toFixed(2),
+        remainingPrincipal: loanAmount.toFixed(2)
+      });
+    }
+  } else if (method === "随借随还") {
+    // 随借随还方式：每月按天计算利息，但不进行实际还款，最后一次还款时一次性结清所有本金和利息
+    let currentPrincipal = Number(loanAmount);
+    let totalInterestForMonths = 0;
+    for (let i = 1; i <= months - 1; i++) {
+      // 每月计算利息，假设每个月按30天
+      const interestForMonth = currentPrincipal * dailyRate * 30;  // 每月利息
+      totalInterestForMonths += interestForMonth;  // 累加总利息
+      const repaymentDate = new Date(start);  // 复制开始日期
+      repaymentDate.setMonth(start.getMonth() + i);  // 设置还款月份
+      repayments.push({
+        date: formatDate(repaymentDate),
+        repayment: interestForMonth.toFixed(2),  // 每期不进行实际还款
+        principal: "0.00",  // 不偿还本金
+        interest: interestForMonth.toFixed(2),  // 仅支付利息
+        remainingPrincipal: currentPrincipal.toFixed(2)  // 保持剩余本金不变
+      });
+    }
+
+    // 最后一期结清所有本金和利息
+    const finalRepaymentDate = new Date(start);
+    finalRepaymentDate.setMonth(start.getMonth() + months);  // 设置为最后一期还款日期
+    const finalInterest = currentPrincipal * dailyRate * 30;  // 计算最后一期的利息
+    const finalRepayment = currentPrincipal + finalInterest;   // 总还款为本金 + 利息
+    totalRepayment += finalRepayment;  // 累加最后的总还款
+    totalInterest += totalInterestForMonths + finalInterest;    // 累加最后的总利息
+    repayments.push({
+      date: formatDate(finalRepaymentDate),
+      repayment: finalRepayment.toFixed(2),  // 最后期的总还款
+      principal: currentPrincipal.toFixed(2),  // 最后一期的本金
+      interest: finalInterest.toFixed(2),  // 最后一期的利息
+      remainingPrincipal: "0.00"  // 最后一期结清所有剩余本金
+    });
+
+  } else {
+    throw new Error("无效的还款方式");
+  }
+
+  return {
+    totalRepayment: totalRepayment.toFixed(2),
+    totalInterest: totalInterest.toFixed(2),
+    repayments
+  };
+}
+
+
+var timer = null;
+function countdown() {
+  var countTime = 60;
+  timer = setInterval(() => {
+    if (countTime <= 0) {
+      clearInterval(timer);
+      $('.code .sendbtn').text('重发验证码');
+      $('.code .sendbtn').prop('disabled', false);
+    } else {
+      $('.code .sendbtn').text(`${countTime}s`);
+      $('.code .sendbtn').prop('disabled', true);
+      countTime--;
+    }
+  }, 1000);
+}
+
+class RequestManager {
+  constructor() {
+    this.requests = new Map(); // 用于存储正在进行的请求
+    this.responses = new Map(); // 用于存储请求的结果
+  }
+  // 检查是否已经有相同的请求在进行中
+  isRequestInProgress(url, options) {
+    const key = JSON.stringify({ url, options });
+    return this.requests.has(key);
+  }
+  // 获取请求的结果
+  getResponse(url, options) {
+    const key = JSON.stringify({ url, options });
+    return this.responses.get(key);
+  }
+  // 添加请求到管理器中
+  addRequest(url, options) {
+    const key = JSON.stringify({ url, options });
+    this.requests.set(key, true);
+  }
+  // 存储请求的结果
+  storeResponse(url, options, response) {
+    const key = JSON.stringify({ url, options });
+    this.responses.set(key, response);
+  }
+  // 从管理器中移除已完成的请求
+  removeRequest(url, options) {
+    const key = JSON.stringify({ url, options });
+    this.requests.delete(key);
+    this.responses.delete(key); // 同时移除存储的结果
+  }
+}
+
+const requestManager = new RequestManager();
+
+// 发起 fetch 请求之前检查是否已经有相同的请求在进行中
+function fetchWithCheck(url, method, options) {
+
+  // 检查是否有重复的请求结果
+  if (requestManager.getResponse(url, options)) {
+    console.log('重复请求的结果已存在，直接返回结果。');
+    return Promise.resolve(requestManager.getResponse(url, options));
+  }
+
+  // 检查是否已经有相同的请求在进行中
+  if (requestManager.isRequestInProgress(url, options)) {
+    console.log('相同请求已经在进行中，等待结果。');
+    return new Promise((resolve) => {
+      const interval = setInterval(() => {
+        const response = requestManager.getResponse(url, options);
+        if (response) {
+          clearInterval(interval);
+          resolve(response);
+        }
+      }, 100); // 每100毫秒检查一次结果
+    });
+  }
+
+  // 如果没有相同的请求在进行中，则添加新请求到管理器中
+  requestManager.addRequest(url, options);
+  const params = {
+    method: method,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(options)
+  };
+  const domain = '/api';
+
+  return fetch(domain + url, params)
+    .then(response => response.json())
+    .then(response => {
+      // 存储请求的结果
+      requestManager.storeResponse(url, options, response);
+      // 请求完成后从管理器中移除该请求
+      requestManager.removeRequest(url, options);
+      return response;
+    })
+    .catch(error => {
+      // 请求完成后从管理器中移除该请求
+      requestManager.removeRequest(url, options);
+      throw error;
+    });
+}
+
+// 发送验证码
+async function sendCode(mobile,channelSign) {
+  clearInterval(timer);
+  var res = await fetchWithCheck('/user/api/verify/request/h5sms','POST',{ phone:mobile,sign: channelSign });
+  if (res.code == 200) {
+      countdown();
+  } else {
+    $('#myDialog .dialogcont').text(res.msg);
+    dialog.showModal();
+  }
+}
+
+function newJump(token, channelSign, phone,) {
+  let uri = `token=${token}&channelSign=${channelSign}`;
+    window.location.replace("/tcwyh5/haluo?" + encodeURIComponent(uri))
+//  //注册后是否下载
+//  if (regDownload==1){
+//   window.location.replace("/tcwyh5/tyr?" + encodeURIComponent(uri))
+// }else {
+//    // 是否跳转下载页
+// if (params.falg == true) {
+//    //h5Switch H5助贷开关 1开0关
+// if (params.h5Switch == 1) {
+//   // formSwitch 长短表单开关
+//   if (params.formSwitch == 0) {
+//     window.location.replace("/tcwyh5/?" + encodeURIComponent(uri))
+//   } else if (params.formSwitch == 1) {
+//     uri += ('&phone='+phone)
+//     window.location.replace("/tcwyh5/haluo?" + encodeURIComponent(uri))
+//   }
+// } else if (params.h5Switch == 0) {
+//   const href = params.formSwitch == 0 ? ("/tcwyh5/result?" + encodeURIComponent(uri)) : ("/tcwyh5/match?" + encodeURIComponent(uri));
+//   window.location.replace(href)
+// } 
+// } else {
+//   const href = params.formSwitch == 0 ? ("/tcwyh5/result?" + encodeURIComponent(uri)) : ("/tcwyh5/match?" + encodeURIComponent(uri));
+//   window.location.replace(href)
+// }
+// }
+
+}
+
+async function getChanel(channelSign) {
+  const res = await fetchWithCheck('/openClose/channelSwitch','POST',{ channelSign: channelSign });
+  if(res.code == 200){
+    channelInfo = res.data;
+    if(res.data.backSwitch == 0){
+      $('.navtop img').remove();
+    }
+    islogin(channelSign,channelInfo);
+  }
+}
+function islogin(channelSign,channelInfo){
+  const token = getCookie("token");
+  const redToken = getCookie("redToken");
+  const phone = getCookie("phone");
+  const url = encodeURIComponent(`token=${token}&channelSign=${channelSign}&redToken=${redToken}&phone=${phone}`);
+//  if(channelInfo.regDownload==1){
+//   window.location.href = `/tcwyh5/tyr?${url}`;
+//   }else 
+  if(token){
+    window.location.href = `/tcwyh5/?${url}`;
+  }
+}
+// 登录
+function loginAction(code,channelSign){
+  // 判断验证码
+  if(!/^\d{4}$/.test(code)){
+    $('#myDialog .dialogcont').text('验证码格式不正确');
+    dialog.showModal();
+    return false;
+  }
+  var params = {
+    phone: $('.phone input').val(),
+    code: code,
+    channelSign: channelSign,
+    location: window.location.href,
+  }
+  const isIos =/(iphone|ipad|Mac OS|iPod|iOS)/i.test(navigator.userAgent);
+  if(isIos){
+    params.ios = 1;
+  }
+  fetchWithCheck('/web/account/signup/sms','POST',params).then(res => {
+    if(res.code == 200){
+      const data = res.data;
+      setCookie('token',data.token);
+      setCookie('phone',params.phone);
+      sessionStorage.setItem('userId',data.userId);
+      sessionStorage.setItem('phone',params.phone);
+      // 跳转页面
+       let uri = `token=${data.token}&channelSign=${channelSign}`;
+        window.location.replace("/tcwyh5?" + encodeURIComponent(uri))
+      newJump(data.token,channelSign,params.phone,);
+    }else{
+      // alert(res.msg);
+      $('#myDialog .dialogcont').text(res.msg);
+      dialog.showModal();
+    }
+  });
+}
+
+window.onpopstate = function (event) {
+  if(cid == 'JW9Da8pfwl0=') return false;
+  history.pushState(null, null, document.URL);
+  const url = window.location.href;
+  const regex = /\/([^\/]+)\.html/;
+  const match = regex.exec(url);
+  if (match) {
+    fetchWithCheck('/openClose/h5LandingUrl','POST',{"channelCode":match[1]}).then(res=>{
+      if(res.code == 200){
+          $('.wldialog .ico').attr('src',res.data.icon);
+          $('.wldialog .desc .name').text(res.data.name);
+          $('.wldialog .btn').attr('tid',res.data.id);
+          $('.wldialog .btn').attr('cid',match[1]);
+          document.querySelector('.wlmask').classList.remove('hidden');
+      }
+    })
+  }
+};
+
+function debounce(func, delay = 500) {
+  let dtimer;
+  return function (...args) {
+    // 清除之前的定时器
+    clearTimeout(dtimer);
+    // 设置新的定时器
+    dtimer = setTimeout(() => {
+      func(...args);
+    }, delay);
+  };
+}
+function numberToChinese(num) {
+	const chineseNumerals = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+	const units = ["", "十", "百", "千"];
+	let result = "";
+	
+	if (num < 10) {
+			return chineseNumerals[num];
+	}
+
+	let unitPos = 0;
+	let str = num.toString();
+	let zeroFlag = false; // 用于处理连续的零
+
+	for (let i = str.length - 1; i >= 0; i--) {
+		let digit = parseInt(str.charAt(i), 10);
+		if (digit === 0) {
+			zeroFlag = true;
+		} else {
+			if (zeroFlag) {
+				result = chineseNumerals[0] + result;
+				zeroFlag = false;
+			}
+			result = chineseNumerals[digit] + units[unitPos] + result;
+		}
+		unitPos++;
+	}
+
+	if (result.startsWith("一十")) {
+		result = result.substring(1);
+	}
+
+	return result;
+}
+// 处理还款计划
+function handlePlan() {
+  var money = $.trim($('.num input').val()).replace(',', '');
+  var months = $('#selectMonth').text().replace(/个月/, '');
+  var ways = $('#payways').text();
+  const result = calculateLoan(money, months, ways);
+  const str = result.repayments[0].date.split("-");
+  $('#plan').html('首期'+str[1]+'月'+str[2]+'日应还<span>'+result.repayments[0].repayment+'</span>元')
+  $('.planmask .tit span').text(ways);
+  $('.planmask .rebox .sum').text(`借满${months}期，总利息¥ ${result.totalInterest}元`);
+  var html = '';
+  result.repayments.map((item,i)=>{
+    html += '<div class="part"><div class="left"><div class="index">第'+numberToChinese(i+1)+'期</div><div class="date">'+item.date+'</div></div><div class="right"><div class="pay">¥ '+item.repayment+'元</div><div class="detail">含本金'+item.principal+'元，利息'+item.interest+'元</div></div></div>'
+  })
+  $(".scrolldiv").html(html);
+}
+
+$(function () {
+  var channelSign = getCookie("cid") || cid;
+  console.log(channelSign,'channelSign');
+  
+  getChanel(channelSign);
+
+  // 关闭弹框
+  dialog.addEventListener("click", function (e) {
+    if (e.target.nodeName.toLowerCase() == "dialog") {
+      dialog.close();
+    }
+  });
+  
+  var query = getQueryParam(window.location.href,'p');
+  if(query){
+    $('.phone input').val(query);
+  }
+
+  var pickerExtend1 = new PickerExtend({
+    trigger: '#selectAction',
+    title: '',
+    wheels: [{ data: ['日常消费', '购买家具或家电', '装修', '婚庆', '教育培训', '健康医疗', '进货'] }],
+    position: [0],
+    callback: function (index, data) { }
+  });
+  var pickerExtend2 = new PickerExtend({
+    trigger: '#selectMonth',
+    title: '',
+    wheels: [{ data: ['3个月', '6个月', '12个月', '36个月'] }],
+    position: [2],
+    callback: function (index, data) {
+      handlePlan();
+    }
+  });
+  var pickerExtend3 = new PickerExtend({
+    trigger: '#payways',
+    title: '',
+    wheels: [{ data: ['随借随还', '等额本息', '等额本金'] }],
+    position: [0],
+    callback: function (index, data) {
+      handlePlan();
+    }
+  });
+
+  $('.money .num input').on('input', debounce(function () {
+    var money = $('.money .num input').val().replace(/\D/g, '');
+    if (money > 200000) {
+      money = '200000';
+    }
+    $('.money .num input').val(money.replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+    handlePlan();
+  }, 500));
+  $('.money .all').click(function () {
+    $('.money .num input').val('20,0000');
+    handlePlan();
+  });
+
+  handlePlan();
+  $('#plan').click(function () {
+    $('.planmask').removeClass('hide');
+  });
+
+  $('.planmask').click(function (e) {
+    if (!$(e.target).closest(".repay").length) {
+      $('.planmask').addClass('hide');
+    }
+  });
+
+  // 限制输入手机号
+  $('.phone input').on('input', function () {
+    var mobile = $(this).val().replace(/\D/g, '');
+    $(this).val(mobile);
+    if (mobile.length > 11) {
+      $(this).val(mobile.slice(0, 11));
+    } else if (mobile.length == 11) {
+      if (!/^1[3456789]\d{9}$/.test(mobile)) {
+        $('#myDialog .dialogcont').text('手机号不正确');
+        dialog.showModal();
+        return false;
+      }
+    }
+  });
+
+  // 立即申请
+  $('.card .btn').click(async function () {
+    // 判断手机号是否正确
+    var mobile = $('.phone input').val();
+    if (!/^1[3456789]\d{9}$/.test(mobile)) {
+      // alert('手机号不正确');
+      $('#myDialog .dialogcont').text('手机号不正确');
+      dialog.showModal();
+      return false;
+    }
+    // 判断是否同意协议
+    if (!$('.xybox input').is(':checked')) {
+      // 弹出协议
+      $('.agreemask').removeClass('hide');
+      document.body.style.overflowY = 'hidden';
+    } else {
+      // 发送验证码
+      // var result = await sendCode(mobile,channelSign);
+      // if(!result){
+      //   $('.sendmask .phone span').text(mobile.replace(/(\d{3})\d{4}(\d{4})/, '\$1****\$2'));
+      //   $('.sendmask').removeClass('hide');
+      //   document.body.style.overflowY = 'hidden';
+      // }else{
+      //   // 免登录
+      //   loginAction('',channelSign,false);
+      // }
+       $('.sendmask .phone span').text(mobile.replace(/(\d{3})\d{4}(\d{4})/, '\$1****\$2'));
+        $('.sendmask').removeClass('hide');
+        document.body.style.overflowY = 'hidden';
+      // loginAction('',channelSign,false);
+      
+    }
+  });
+
+  $('.agreemask .cancel').click(function () {
+    $('.agreemask').addClass('hide');
+    document.body.style.overflowY = 'scroll';
+  });
+  $('.agreemask .agree').click(async function () {
+    // 关闭弹框
+    $('.agreemask').addClass('hide');
+    document.body.style.overflowY = 'scroll';
+    $('.xybox input').prop('checked', true);
+    var mobile = $('.phone input').val();
+    // // 判断是否免登 发送验证码
+    // var result1 = await sendCode(mobile,channelSign);
+    // if(!result1){
+    //   // 打开验证码
+    //   sendCode(mobile);
+    //   $('.sendmask .phone span').text(mobile.replace(/(\d{3})\d{4}(\d{4})/, '\$1****\$2'));
+    //   $('.sendmask').removeClass('hide');
+    //   document.body.style.overflowY = 'hidden';
+    // }else{
+    //   // 免登录
+    //   loginAction('',channelSign,false);
+    // }
+      loginAction('',channelSign,false);
+
+  });
+  // 重新发送验证码
+  $('.sendmask .sendbtn').click(function () {
+    if (!$(this).prop('disabled')) {
+      sendCode($('.phone input').val(),channelSign);
+    }
+  });
+  // 验证码限制
+  $('.sendmask .code input').on('input', function () {
+    var code = $(this).val().replace(/\D/g, '');
+    $(this).val(code);
+    if (code.length > 4) {
+      $(this).val(code.slice(0, 4));
+    } else if (code.length == 4) {
+      loginAction(code,channelSign,true);
+    }
+  });
+
+
+
+  // 同意协议
+  $('.comfirm .btn button,.comfirm .cocls').click(function () {
+    var toggelBtn = $(this).attr('t');
+    if (toggelBtn == 1) {
+      $('.xybox #agree').prop('checked', true);
+      // 发送验证码
+      sendCode($('.phone input').val());
+      $('.agreemask').addClass('hidden');
+      $('.sendmask').removeClass('hidden');
+      document.body.style.overflowY = 'hidden';
+    } else {
+      $('.agreemask').addClass('hidden');
+      document.body.style.overflowY = 'scroll';
+    }
+  });
+  // 提交登录
+  $('.sendmask .comfirm').click(function () {
+    // 获取验证码
+    var code = $('.sendmask .code input').val();
+    loginAction(code,channelSign,true);
+  });
+
+
+  // 查看协议
+  $('.agreemask .desc span').click(function () {
+    var iframeurl = `https://${window.location.hostname}/agreement/ysxy.html?title=0`;
+    if ($(this).attr('t') == '1') {
+      $('.iframe .txt').text('注册协议');
+        iframeurl = `https://${window.location.hostname}/agreement/dlxy.html?title=0`;
+    } else {
+      $('.iframe .txt').text('隐私协议');
+    }
+    $('.iframe iframe').attr('src', iframeurl);
+    $('.xymask').removeClass('hide');
+    document.body.style.overflowY = 'hidden';
+  })
+
+  $('.wlmask .wldialog .close,.wlmask .wldialog .btn').click(function () {
+    $('.wlmask').addClass('hide');
+    document.body.style.overflowY = 'scroll';
+  });
+  $('.wlmask .wldialog .card').click(function () {
+    var tid = $('.wlmask .wldialog .btn').attr('tid');
+    var cid = $('.wlmask .wldialog .btn').attr('cid');
+    fetchWithCheck('/openClose/h5Landing/apply', 'POST', { "appId": tid, "channelCode": cid }).then(ress => {
+      if (ress.code == 200) {
+        window.location.href = ress.data;
+      }
+    }).finally(() => {
+      document.querySelector('.wlmask').classList.remove('hide');
+      document.body.style.overflowY = 'scroll';
+    })
+  })
+
+  // 注册隐私协议
+  $('.xybox span').click(function () {
+    var iframeurl = $(this).attr('t') == 1 ? `https://${window.location.hostname}/agreement/dlxy.html?title=0` : `https://${window.location.hostname}/agreement/ysxy.html?title=0`;
+    $('.iframe iframe').attr('src', iframeurl);
+    $('.iframe .txt').text($(this).attr('t') == 1 ? '注册协议' : '隐私协议');
+    setTimeout(function () {
+      $('.xymask').removeClass('hide');
+      document.body.style.overflowY = 'hidden';
+    }, 100);
+  });
+
+  $('.xymask').click(function (event) {
+    if (!event.target.closest('.iframe') || event.target.classList.contains('close')) {
+      $('.xymask').addClass('hide');
+      document.body.style.overflowY = 'scroll';
+    }
+  });
+
+
+})
